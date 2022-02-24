@@ -8,7 +8,7 @@ async function activateXR() {
   // create a scene to add objects to
   const scene = new THREE.Scene();
   // add lighting
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
   directionalLight.position.set(10, 15, 10);
   scene.add(directionalLight);
   // Set up the WebGLRenderer, which handles rendering to the session's base layer.
@@ -40,7 +40,7 @@ const referenceSpace = await session.requestReferenceSpace('local');
 var box = getBox(1, 1, 1);
 
 // set positions
-box.postion.set(3, 2, 2);
+box.postion.set(0, 0, -0.5);
 scene.add(box);
 // Create a render loop that allows us to draw on the AR view.
 const onXRFrame = (time, frame) => {
@@ -80,9 +80,7 @@ function getBox(w, h, d) {
 	var mesh = new THREE.Mesh(
 		geometry,
 		material 
-	);
-	mesh.castShadow = true;
-
+	)
 	return mesh;
 }
 //     const isArSessionSupported =
