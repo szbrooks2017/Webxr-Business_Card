@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Stratton Brooks</title>
         <link href="style.css" type="text/css" rel="stylesheet">
           <!-- three.js -->
@@ -10,12 +11,11 @@
     </head>
     <body>
         <h2>Augmented Reality with the WebXR Device API</h2>
-        <p>
-            An augmented reality business card!
-        </p>
-
         <!-- Starting an immersive WebXR session requires user interaction. Start the WebXR experience with a simple button. -->
-        <a id="webgl">Start</a>
-        <script src="./main.js"></script>
+        <div>
+            <p class="name">Stratton's Business Card</p>
+            <button id="webgl" onclick="init()">Start WebXR</button>
+          </div>
     </body>
+    <script src="./main.js"></script>
 </html>

@@ -1,8 +1,8 @@
-var button = document.getElementById("webgl");
-
-button.onclick = function(){
-    console.log("opened");
-    const canvas = document.createElement("canvas");
-    document.body.appendChild(canvas);
-    const gl = canvas.getContext("webgl", {xrCompatible: true});
-};
+async function init(){
+    const isArSessionSupported =
+      navigator.xr &&
+      navigator.xr.isSessionSupported &&
+      await navigator.xr.isSessionSupported("immersive-ar");
+    if (isArSessionSupported){ 
+        document.getElementById("enter-ar").addEventListener("click", window.app.activateXR)}
+}
