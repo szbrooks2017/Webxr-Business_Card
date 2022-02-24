@@ -5,6 +5,7 @@ async function activateXR() {
   document.body.appendChild(canvas);
   const gl = canvas.getContext("webgl", {xrCompatible: true});
 
+  // create a scene to add objects to
   const scene = new THREE.Scene();
 
   // Set up the WebGLRenderer, which handles rendering to the session's base layer.
@@ -32,6 +33,12 @@ session.updateRenderState({
 // near the viewer's position at the time the session was created.
 const referenceSpace = await session.requestReferenceSpace('local');
 
+// add objects here
+var box = getBox(1, 1, 1);
+
+// set positions
+box.postion.set(3, 0, 2);
+scene.add(box);
 // Create a render loop that allows us to draw on the AR view.
 const onXRFrame = (time, frame) => {
     // Queue up the next draw request.
@@ -60,6 +67,20 @@ const onXRFrame = (time, frame) => {
     }
   }
   session.requestAnimationFrame(onXRFrame);
+}
+
+function getBox(w, h, d) {
+	var geometry = new THREE.BoxGeometry(w, h, d);
+	var material = new THREE.MeshPhongMaterial({
+		color: 'rgb(120, 120, 120)'
+	});
+	var mesh = new THREE.Mesh(
+		geometry,
+		material 
+	);
+	mesh.castShadow = true;
+
+	return mesh;
 }
 //     const isArSessionSupported =
 //       navigator.xr &&
