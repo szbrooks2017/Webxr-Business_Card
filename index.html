@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link type="text/css" rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.js" crossorigin="anonymous"></script>
+    <script src="lib/threex.domevents.js"></script>
   </head>
 <body>
   <script type="module">
@@ -54,6 +55,13 @@
       mesh = new THREE.Mesh(geometry, material);
       mesh.position.set(0, 0, -0.5);
       scene.add(mesh);
+      
+      // making a button?
+      const domEvents = new THREEx.DomEvents(camera, renderer.domElement)
+
+      domEvents.addEventListener(mesh, 'click', event => {
+        window.location.href = "http://stackoverflow.com";
+      })
 
       // Add the AR button to the body of the DOM
 			document.body.appendChild(ARButton.createButton(renderer));
