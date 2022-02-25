@@ -117,7 +117,7 @@
       // calculate objects intersecting the picking ray
       const found = raycaster.intersectObjects( scene.children );
       if(found.length > 0 && found[0].object.userData.canLink){
-        // canLink = found[0].object;
+        canLink = found[0].object;
         window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
         }
       // if (canLink.userData.name == 'box'){
