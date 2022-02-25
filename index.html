@@ -60,26 +60,53 @@
       
       mesh.userData.canLink = true
       mesh.userData.name = "box"
-      // making a button?
-      // const domEvents = new THREEx.DomEvents(camera, renderer.domElement)
-
-      // window.addEventListener(mesh, 'click', function(event){
-      //   console.log('you clicked on the mesh')
-        
-      // })
-
-      // SPRITES
-
-      // const map = new THREE.TextureLoader().load( 'sprite.png' );
-      // const material = new THREE.SpriteMaterial( { map: map } );
-
-      // const sprite = new THREE.Sprite( material );
-      // scene.add( sprite );
 
       // RAYCASTER
       mouse = new THREE.Vector2();
       raycaster = new THREE.Raycaster();
-      // var canLink = THREE.Object3D;
+
+      // SPRITES
+
+      // linkedin
+      const linkedinMap = new THREE.TextureLoader().load( '/assets/AR_Card_linkedin.png' );
+      const linkedinMaterial = new THREE.SpriteMaterial(  {map: linkedinMap} );
+      const linkedSprite = new THREE.Sprite( linkedinMaterial );
+      linkedSprite.scale.set(.3, .3, .3);
+      linkedSprite.position.set(0, 0, -1);
+      linkedSprite.userData.canLink = true
+      linkedSprite.userData.name = "linkedin"
+      scene.add( linkedSprite );
+
+      // github
+      const githubMap = new THREE.TextureLoader().load( '/assets/AR_Card_github.png' );
+      const githubMaterial = new THREE.SpriteMaterial(  {map: githubMap} );
+      const githubSprite = new THREE.Sprite( githubMaterial );
+      githubSprite.scale.set(.3, .3, .3);
+      githubSprite.position.set(1, 0, -1);
+      githubSprite.userData.canLink = true
+      githubSprite.userData.name = "github"
+      scene.add( githubSprite );
+
+      // email
+      const emailMap = new THREE.TextureLoader().load( '/assets/AR_Card_email.png' );
+      const emailMaterial = new THREE.SpriteMaterial(  {map: emailMap} );
+      const emailSprite = new THREE.Sprite( emailMaterial );
+      emailSprite.scale.set(.3, .3, .3);
+      emailSprite.position.set(-1, 0, -1);
+      emailSprite.userData.canLink = true
+      emailSprite.userData.name = "email"
+      scene.add( emailSprite );
+
+      // instagram
+      const instagramMap = new THREE.TextureLoader().load( '/assets/AR_Card_instagram.png' );
+      const instagramMaterial = new THREE.SpriteMaterial(  {map: instagramMap} );
+      const instagramSprite = new THREE.Sprite( instagramMaterial );
+      instagramSprite.scale.set(.3, .3, .3);
+      instagramSprite.position.set(2, 0, -1);
+      instagramSprite.userData.canLink = true
+      instagramSprite.userData.name = "instagram"
+      scene.add( instagramSprite );
+
 
       function onPointerMove( event ) {
         var canLink = THREE.Object3D;
@@ -92,11 +119,24 @@
 
         // calculate objects intersecting the picking ray
         const found = raycaster.intersectObjects( scene.children );
-        if(found.length > 0 && found[0].object.userData.canLink){
+        if (found.length > 0 && found[0].object.userData.canLink){
           canLink = found[0].object;
-          if(canLink.userData.name == 'box')
+          if (canLink.userData.name == 'linkedin')
           {
-            window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
+            // window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
+            console.log(canLink.userData.name);
+          }
+          if (canLink.userData.name == 'github')
+          {
+            console.log(canLink.userData.name);
+          }
+          if (canLink.userData.name == 'instagram')
+          {
+            console.log(canLink.userData.name);
+          }
+          if (canLink.userData.name == 'email')
+          {
+            console.log(canLink.userData.name);
           }
         
         }
@@ -125,26 +165,6 @@
     function render(){
       	// update the picking ray with the camera and pointer position
       raycaster.setFromCamera( mouse, camera );
-
-      // // calculate objects intersecting the picking ray
-      // const found = raycaster.intersectObjects( scene.children );
-      // if(found.length > 0 && found[0].object.userData.canLink){
-      //   canLink = found[0].object;
-      //   window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
-      //   }
-      // if (canLink.userData.name == 'box'){
-      //   window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
-      // }
-          
-        // console.log(canLink.userData.name);
-        // canLink.color.set( 0xff0000 );
-
-      // for ( let i = 0; i < found.length; i ++ ) {
-
-      //   found[ i ].object.material.color.set( 0xff0000 );
-
-      // }
-      // this gets called every time the screen is refreshed
       renderer.render(scene, camera);
     }
 // <!-- Starting an immersive WebXR session requires user interaction. We start this one with a simple button. -->
