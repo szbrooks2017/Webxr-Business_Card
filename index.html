@@ -68,41 +68,41 @@
       // SPRITES
 
       // linkedin
-      const linkedinMap = new THREE.TextureLoader().load( '/assets/AR_Card_linkedin.png' );
+      const linkedinMap = new THREE.TextureLoader().load( 'assets/AR_Card_linkedin.png' );
       const linkedinMaterial = new THREE.SpriteMaterial(  {map: linkedinMap} );
       const linkedSprite = new THREE.Sprite( linkedinMaterial );
       linkedSprite.scale.set(.3, .3, .3);
-      linkedSprite.position.set(-1.5, 0, -1);
+      linkedSprite.position.set(.5, 0, 0);
       linkedSprite.userData.canLink = true
       linkedSprite.userData.name = "linkedin"
       scene.add( linkedSprite );
 
       // github
-      const githubMap = new THREE.TextureLoader().load( '/assets/AR_Card_github.png' );
+      const githubMap = new THREE.TextureLoader().load( 'assets/AR_Card_github.png' );
       const githubMaterial = new THREE.SpriteMaterial(  {map: githubMap} );
       const githubSprite = new THREE.Sprite( githubMaterial );
       githubSprite.scale.set(.3, .3, .3);
-      githubSprite.position.set(1, 0, -1);
+      githubSprite.position.set(-.5, 0, 0);
       githubSprite.userData.canLink = true
       githubSprite.userData.name = "github"
       scene.add( githubSprite );
 
       // email
-      const emailMap = new THREE.TextureLoader().load( '/assets/AR_Card_email.png' );
+      const emailMap = new THREE.TextureLoader().load( 'assets/AR_Card_email.png' );
       const emailMaterial = new THREE.SpriteMaterial(  {map: emailMap} );
       const emailSprite = new THREE.Sprite( emailMaterial );
       emailSprite.scale.set(.3, .3, .3);
-      emailSprite.position.set(-1, 0, -1);
+      emailSprite.position.set(-.5, 0, -1);
       emailSprite.userData.canLink = true
       emailSprite.userData.name = "email"
       scene.add( emailSprite );
 
       // instagram
-      const instagramMap = new THREE.TextureLoader().load( '/assets/AR_Card_instagram.png' );
+      const instagramMap = new THREE.TextureLoader().load( 'assets/AR_Card_instagram.png' );
       const instagramMaterial = new THREE.SpriteMaterial(  {map: instagramMap} );
       const instagramSprite = new THREE.Sprite( instagramMaterial );
       instagramSprite.scale.set(.3, .3, .3);
-      instagramSprite.position.set(1.5, 0, -1);
+      instagramSprite.position.set(.5, 0, -1);
       instagramSprite.userData.canLink = true
       instagramSprite.userData.name = "instagram"
       scene.add( instagramSprite );
