@@ -72,7 +72,7 @@
       const linkedinMaterial = new THREE.SpriteMaterial(  {map: linkedinMap} );
       const linkedSprite = new THREE.Sprite( linkedinMaterial );
       linkedSprite.scale.set(.3, .3, .3);
-      linkedSprite.position.set(0, 0, -1);
+      linkedSprite.position.set(-1.5, 0, -1);
       linkedSprite.userData.canLink = true
       linkedSprite.userData.name = "linkedin"
       scene.add( linkedSprite );
@@ -102,7 +102,7 @@
       const instagramMaterial = new THREE.SpriteMaterial(  {map: instagramMap} );
       const instagramSprite = new THREE.Sprite( instagramMaterial );
       instagramSprite.scale.set(.3, .3, .3);
-      instagramSprite.position.set(2, 0, -1);
+      instagramSprite.position.set(1.5, 0, -1);
       instagramSprite.userData.canLink = true
       instagramSprite.userData.name = "instagram"
       scene.add( instagramSprite );
@@ -123,19 +123,22 @@
           canLink = found[0].object;
           if (canLink.userData.name == 'linkedin')
           {
-            // window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
+            window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
             console.log(canLink.userData.name);
           }
           if (canLink.userData.name == 'github')
           {
+            window.location.href = "https://www.github.com/szbrooks2017/";
             console.log(canLink.userData.name);
           }
           if (canLink.userData.name == 'instagram')
           {
+            window.location.href = "https://www.instagram.com/stratton.brooks/";
             console.log(canLink.userData.name);
           }
           if (canLink.userData.name == 'email')
           {
+            window.location.href = "mailto:strattonxr@gmail.com";
             console.log(canLink.userData.name);
           }
         
