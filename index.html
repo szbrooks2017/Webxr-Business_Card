@@ -14,6 +14,8 @@
     import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
 
     var camera, scene, renderer, mesh, mouse, raycaster;
+    var canLink = THREE.Object3D;
+
 
     init();
     animate();
@@ -53,13 +55,15 @@
         transparent: 1
       })
       mesh = new THREE.Mesh(geometry, material);
-      mesh.position.set(-2, 0, -0.5);
+      mesh.position.set(-1, 0, -0.5);
       scene.add(mesh);
       
+      mesh.userData.canLink = true
+      mesh.userData.name = "box"
       // making a button?
       // const domEvents = new THREEx.DomEvents(camera, renderer.domElement)
 
-      // domEvents.addEventListener(mesh, 'mouseup', function(event){
+      // window.addEventListener(mesh, 'click', function(event){
       //   console.log('you clicked on the mesh')
         
       // })
@@ -75,6 +79,8 @@
       // RAYCASTER
       mouse = new THREE.Vector2();
       raycaster = new THREE.Raycaster();
+      var canLink = THREE.Object3D;
+
       function onPointerMove( event ) {
 
         // calculate pointer position in normalized device coordinates
@@ -109,13 +115,23 @@
       raycaster.setFromCamera( mouse, camera );
 
       // calculate objects intersecting the picking ray
-      const intersects = raycaster.intersectObjects( scene.children );
+      const found = raycaster.intersectObjects( scene.children );
+      if(found.length > 0 && found[0].object.userData.canLink){
+        // canLink = found[0].object;
+        window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
+        }
+      // if (canLink.userData.name == 'box'){
+      //   window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
+      // }
+          
+        // console.log(canLink.userData.name);
+        // canLink.color.set( 0xff0000 );
 
-      for ( let i = 0; i < intersects.length; i ++ ) {
+      // for ( let i = 0; i < found.length; i ++ ) {
 
-        intersects[ i ].object.material.color.set( 0xff0000 );
+      //   found[ i ].object.material.color.set( 0xff0000 );
 
-      }
+      // }
       // this gets called every time the screen is refreshed
       renderer.render(scene, camera);
     }
