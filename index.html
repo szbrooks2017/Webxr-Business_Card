@@ -14,6 +14,7 @@
     import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
 
     var camera, scene, renderer, mesh, mouse, raycaster, loader;
+    let jellyMesh;
     // var canLink = THREE.Object3D;
 
 
@@ -53,12 +54,22 @@
         jellyPath,
         function (gltf){
           jellyFish = gltf.scene;
+          jellyMesh = gltf.animations;
           jellyFish.position.set(0, 0, -8);
           jellyFish.scale.set(.2, .2, .2);
           scene.add(jellyFish);
           console.log(jellyFish);
         }
       )
+      // // jelly fish animation
+
+      // const mixer = new THREE.AnimationMixer( jellyMesh );
+      // const clips = jellyMesh.animations;
+
+      // clips.forEach( function ( clip ) {
+      //   mixer.clipAction( clip ).play();
+      // } );
+
       // isocahedron!!
       const geometry = new THREE.IcosahedronGeometry(0.1, 1);
       const material = new THREE.MeshPhongMaterial({
@@ -72,8 +83,8 @@
       mesh.position.set(-1, 0, -0.5);
       scene.add(mesh);
       
-      mesh.userData.canLink = true
-      mesh.userData.name = "box"
+      mesh.userData.canLink = true;
+      mesh.userData.name = "box";
 
       // --RAYCASTER--
       mouse = new THREE.Vector2();
@@ -87,8 +98,8 @@
       const linkedSprite = new THREE.Sprite( linkedinMaterial );
       linkedSprite.scale.set(.3, .3, .3);
       linkedSprite.position.set(.5, 0, 0);
-      linkedSprite.userData.canLink = true
-      linkedSprite.userData.name = "linkedin"
+      linkedSprite.userData.canLink = true;
+      linkedSprite.userData.name = "linkedin";
       scene.add( linkedSprite );
 
       // github
@@ -97,8 +108,8 @@
       const githubSprite = new THREE.Sprite( githubMaterial );
       githubSprite.scale.set(.3, .3, .3);
       githubSprite.position.set(-.5, 0, 0);
-      githubSprite.userData.canLink = true
-      githubSprite.userData.name = "github"
+      githubSprite.userData.canLink = true;
+      githubSprite.userData.name = "github";
       scene.add( githubSprite );
 
       // email
@@ -107,8 +118,8 @@
       const emailSprite = new THREE.Sprite( emailMaterial );
       emailSprite.scale.set(.3, .3, .3);
       emailSprite.position.set(-.5, 0, -1);
-      emailSprite.userData.canLink = true
-      emailSprite.userData.name = "email"
+      emailSprite.userData.canLink = true;
+      emailSprite.userData.name = "email";
       scene.add( emailSprite );
 
       // instagram
@@ -137,7 +148,7 @@
           canLink = found[0].object;
           if (canLink.userData.name == 'linkedin')
           {
-            // window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
+            window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
             console.log(canLink.userData.name);
           }
           if (canLink.userData.name == 'github')
@@ -147,7 +158,7 @@
           }
           if (canLink.userData.name == 'instagram')
           {
-            window.location.href = "https://www.instagram.com/stratton.brooks/";
+            // window.location.href = "https://www.instagram.com/stratton.brooks/";
             console.log(canLink.userData.name);
           }
           if (canLink.userData.name == 'email')
@@ -173,6 +184,9 @@
 
 			renderer.setSize(window.innerWidth, window.innerHeight);
 		}
+    function update () {
+      mixer.update( deltaSeconds );
+    }
 
     function animate(){
       // set teh render to be called in a loop
