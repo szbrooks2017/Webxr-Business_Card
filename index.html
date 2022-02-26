@@ -37,17 +37,23 @@
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true});
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(window.innerWidth / window.innerHeight);
+      console.log(render);
       // for gltf
-      renderer.gammaFactor = 2;
-      renderer.gammaOutput = true;
+      // renderer.gammaFactor = 2;
+      // renderer.gammaOutput = true;
+      renderer.outputEncoding = THREE.sRGBEncoding;
       // enable for xr and add it to the DOM
       renderer.xr.enabled = true;
       container.appendChild(renderer.domElement);
 
       // --LIGHT--
-      var light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 2);
+      var light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, .5);
 			light.position.set(0.5, 1, 0.25);
 			scene.add(light);
+
+      var directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+      directionalLight.position.set(13, 10, 10);
+      scene.add(directionalLight);
 
       // --RAYCASTER--
       mouse = new THREE.Vector2();
@@ -62,6 +68,14 @@
         jellyFish = gltf.scene 
         jellyFish.position.set(0, 0, -7);
         jellyFish.scale.set(.2, .2, .2);
+        jellyFish.traverse((child) =>{
+          if(child instanceof THREE.Mesh){
+            child.material.emmisiveIntensity = 10;
+            child.material.emmissive='42f5e6';
+            console.log(child.material);
+          }
+        })
+
         mixer = new THREE.AnimationMixer( gltf.scene );
         var action = mixer.clipAction( gltf.animations[ 0 ] );
         console.log(gltf.scene);
@@ -78,7 +92,7 @@
       const linkedinMaterial = new THREE.SpriteMaterial(  {map: linkedinMap} );
       const linkedSprite = new THREE.Sprite( linkedinMaterial );
       linkedSprite.scale.set(.3, .3, .3);
-      linkedSprite.position.set(0.20, -1, -1);
+      linkedSprite.position.set(0.20, -2, -2);
       linkedSprite.userData.canLink = true;
       linkedSprite.userData.name = "linkedin";
       scene.add( linkedSprite );
@@ -88,7 +102,7 @@
       const githubMaterial = new THREE.SpriteMaterial(  {map: githubMap} );
       const githubSprite = new THREE.Sprite( githubMaterial );
       githubSprite.scale.set(.3, .3, .3);
-      githubSprite.position.set(-0.20, -1, -1);
+      githubSprite.position.set(-0.20, -2, -2);
       githubSprite.userData.canLink = true;
       githubSprite.userData.name = "github";
       scene.add( githubSprite );
@@ -98,7 +112,7 @@
       const emailMaterial = new THREE.SpriteMaterial(  {map: emailMap} );
       const emailSprite = new THREE.Sprite( emailMaterial );
       emailSprite.scale.set(.3, .3, .3);
-      emailSprite.position.set(-.6, -1, -1);
+      emailSprite.position.set(-.6, -2, -2);
       emailSprite.userData.canLink = true;
       emailSprite.userData.name = "email";
       scene.add( emailSprite );
@@ -108,7 +122,7 @@
       const instagramMaterial = new THREE.SpriteMaterial(  {map: instagramMap} );
       const instagramSprite = new THREE.Sprite( instagramMaterial );
       instagramSprite.scale.set(.3, .3, .3);
-      instagramSprite.position.set(.6, -1, -1);
+      instagramSprite.position.set(.6, -2, -2);
       instagramSprite.userData.canLink = true
       instagramSprite.userData.name = "instagram"
       scene.add( instagramSprite );
