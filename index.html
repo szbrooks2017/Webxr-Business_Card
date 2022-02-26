@@ -194,6 +194,8 @@
       requestAnimationFrame( animate );
       var delta = clock.getDelta();
       if ( mixer ) mixer.update( delta );
+      if ( mixer1 ) mixer1.update( delta );
+      if ( mixer2 ) mixer2.update( delta );
       raycaster.setFromCamera( mouse, camera );
       renderer.setAnimationLoop(render);
       // stats.update();
@@ -216,7 +218,7 @@
       }
       if (jellyFish2 !== undefined)
       {
-        jellyFish2.position.y += .0007;
+        jellyFish2.position.y += .0009;
       }
     }
 // <!-- Starting an immersive WebXR session requires user interaction. We start this one with a simple button. -->
