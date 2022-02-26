@@ -54,17 +54,27 @@
         jellyPath,
         function (gltf){
           jellyFish = gltf.scene;
-          jellyMesh = gltf.animations;
+          // jellyMesh = gltf.animations;
           jellyFish.position.set(0, 0, -8);
           jellyFish.scale.set(.2, .2, .2);
+          // jelly fish animation
+          const mixer = new THREE.AnimationMixer( jellyFish );
+          // console.log(mixer);
+          const clips = gltf.animations;
+          console.log(clips);
+          const clip = clips.find((clip) => clip.name === 'Take 001');
+          const action = mixer.clipAction( clip );
+          action.play();
           scene.add(jellyFish);
-          console.log(jellyFish);
-        }
-      )
-      // // jelly fish animation
+          // clips.forEach( function ( clip ) {
+          //   mixer.clipAction( clip ).play();
+          // } );
 
-      // const mixer = new THREE.AnimationMixer( jellyMesh );
-      // const clips = jellyMesh.animations;
+        })
+      // jelly fish animation
+      // console.log(jellyFish);
+      // const mixer = new THREE.AnimationMixer( jellyFish );
+      // const clips = jellyFish.animation;
 
       // clips.forEach( function ( clip ) {
       //   mixer.clipAction( clip ).play();
