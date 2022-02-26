@@ -14,7 +14,7 @@
     import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
 
     var camera, scene, renderer, mesh, mouse, raycaster, loader;
-    let jellyAnim, jellyFish, mixer, clock;
+    let jellyFish, jellyFish1, jellyFish2, mixer, mixer1, mixer2, clock;
     // var canLink = THREE.Object3D;
 
 
@@ -64,18 +64,35 @@
       // Jellyfish
       var loader = new THREE.GLTFLoader().setPath( 'assets/jellyfish/' );
       loader.load( 'scene.gltf', function ( gltf ) {
-
         jellyFish = gltf.scene 
         jellyFish.position.set(0, 0, -7);
         jellyFish.scale.set(.2, .2, .2);
-
         mixer = new THREE.AnimationMixer( gltf.scene );
         var action = mixer.clipAction( gltf.animations[ 0 ] );
-        console.log(jellyFish.position.y);
         action.play();
-
         scene.add( jellyFish );
-
+      } );
+      // jellyfish 2
+      var loader1 = new THREE.GLTFLoader().setPath( 'assets/jellyfish/' );
+      loader1.load( 'scene.gltf', function ( gltf ) {
+        jellyFish1 = gltf.scene 
+        jellyFish1.position.set(10, -7, -2);
+        jellyFish1.scale.set(.2, .2, .2);
+        mixer1 = new THREE.AnimationMixer( gltf.scene );
+        var action1 = mixer1.clipAction( gltf.animations[ 0 ] );
+        action1.play();
+        scene.add( jellyFish1 );
+      } );
+      // jellyfish 3
+      var loader2 = new THREE.GLTFLoader().setPath( 'assets/jellyfish/' );
+      loader1.load( 'scene.gltf', function ( gltf ) {
+        jellyFish2 = gltf.scene 
+        jellyFish2.position.set(13, -7, 10);
+        jellyFish2.scale.set(.2, .2, .2);
+        mixer2 = new THREE.AnimationMixer( gltf.scene );
+        var action2 = mixer2.clipAction( gltf.animations[ 0 ] );
+        action2.play();
+        scene.add( jellyFish2 );
       } );
 
       // --SPRITES--
@@ -192,6 +209,14 @@
       if (jellyFish !== undefined)
       {
         jellyFish.position.y += .0007;
+      }
+      if (jellyFish1 !== undefined)
+      {
+        jellyFish1.position.y += .005;
+      }
+      if (jellyFish2 !== undefined)
+      {
+        jellyFish2.position.y += .0007;
       }
     }
 // <!-- Starting an immersive WebXR session requires user interaction. We start this one with a simple button. -->
