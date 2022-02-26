@@ -42,6 +42,7 @@
       // renderer.gammaFactor = 2;
       // renderer.gammaOutput = true;
       renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.shadow
       // enable for xr and add it to the DOM
       renderer.xr.enabled = true;
       container.appendChild(renderer.domElement);
@@ -164,19 +165,19 @@
           canLink = found[0].object;
           if (canLink.userData.name == 'linkedin')
           {
-            window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
+            window.open("https://www.linkedin.com/in/stratton-brooks");
           }
           if (canLink.userData.name == 'github')
           {
-            window.location.href = "https://www.github.com/szbrooks2017/";
+            window.open("https://www.github.com/szbrooks2017/");
           }
           if (canLink.userData.name == 'instagram')
           {
-            window.location.href = "https://www.instagram.com/stratton.brooks/";
+            window.open("https://www.instagram.com/stratton.brooks/");
           }
           if (canLink.userData.name == 'email')
           {
-            window.location.href = "mailto:strattonxr@gmail.com";
+            window.open("mailto:strattonxr@gmail.com");
           }
         
         }
