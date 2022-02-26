@@ -47,12 +47,12 @@
       container.appendChild(renderer.domElement);
 
       // --LIGHT--
-      var light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, .5);
+      var light = new THREE.HemisphereLight(0xffffff, new THREE.Color('rgb(235, 64, 52)'), 1);
 			light.position.set(0.5, 1, 0.25);
 			scene.add(light);
 
-      var directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-      directionalLight.position.set(13, 10, 10);
+      var directionalLight = new THREE.DirectionalLight(new THREE.Color('rgb(235, 64, 52)'), 2);
+      directionalLight.position.set(10, 10, 13);
       scene.add(directionalLight);
 
       // --RAYCASTER--
@@ -68,17 +68,10 @@
         jellyFish = gltf.scene 
         jellyFish.position.set(0, 0, -7);
         jellyFish.scale.set(.2, .2, .2);
-        jellyFish.traverse((child) =>{
-          if(child instanceof THREE.Mesh){
-            child.material.emmisiveIntensity = 10;
-            child.material.emmissive='42f5e6';
-            console.log(child.material);
-          }
-        })
 
         mixer = new THREE.AnimationMixer( gltf.scene );
         var action = mixer.clipAction( gltf.animations[ 0 ] );
-        console.log(gltf.scene);
+        console.log(jellyFish.position.y);
         action.play();
 
         scene.add( jellyFish );
@@ -190,8 +183,16 @@
       }
 
     function render(){
+      moveJelly();
       // update the picking ray with the camera and pointer position
       renderer.render(scene, camera);
+    }
+
+    function moveJelly(){
+      if (jellyFish !== undefined)
+      {
+        jellyFish.position.y += .0007;
+      }
     }
 // <!-- Starting an immersive WebXR session requires user interaction. We start this one with a simple button. -->
 // <!-- <input type = "button" onclick = "activateXR()" value = "Activate Business Card" id="start-ar"> -->
