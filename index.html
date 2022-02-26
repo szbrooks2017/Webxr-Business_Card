@@ -54,20 +54,23 @@
       // loader = new THREE.GLTFLoader();
       var loader = new THREE.GLTFLoader().setPath( 'assets/jellyfish/' );
       loader.load( 'scene.gltf', function ( gltf ) {
-
-        mixer = new THREE.AnimationMixer( gltf.scene );
-        var action = mixer.clipAction( gltf.animations[ 0 ] );
+        JellyFish = gltf.scene;
+        jellyAnim = gltf.animations;
+        mixer = new THREE.AnimationMixer( JellyFish);
+        var action = mixer.clipAction( jellyAnim[ 0 ] );
+        JellyFish.position.set(0, 0, -10);
+        JellyFish.scale.set(.05, .05, .05);
         action.play();
 
-        scene.add( gltf.scene );
+        scene.add( JellyFish );
 
       } );
 
       // loader.load( jellyPath, function (gltf){
       //     jellyFish = gltf.scene;
       //     jellyAnim = gltf.animations;
-      //     jellyFish.position.set(0, 0, -8);
-      //     jellyFish.scale.set(.2, .2, .2);
+          // jellyFish.position.set(0, 0, -8);
+          // jellyFish.scale.set(.2, .2, .2);
       //     // jelly fish animation
       //     mixer = new THREE.AnimationMixer( jellyFish );
       //     var action = mixer.clipAction(jellyAnim[0]);
