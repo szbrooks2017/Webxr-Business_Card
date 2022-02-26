@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link type="text/css" rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.js" crossorigin="anonymous"></script>
-    <script src="lib/threex.domevents.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
   </head>
 <body>
   <script type="module">
     import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
 
-    var camera, scene, renderer, mesh, mouse, raycaster;
+    var camera, scene, renderer, mesh, mouse, raycaster, loader;
     // var canLink = THREE.Object3D;
 
 
@@ -24,13 +24,13 @@
       const container = document.createElement('div');
       document.body.appendChild(container);
 
-      // SCENE
+      // --SCENE--
       scene = new THREE.Scene();
 
-      // CAMERA
+      // --CAMERA--
       camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 40);
 
-      // RENDERER
+      // --RENDERER--
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true});
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(window.innerWidth / window.innerHeight);
@@ -38,13 +38,27 @@
       renderer.xr.enabled = true;
       container.appendChild(renderer.domElement);
 
-      // LIGHT
+      // --LIGHT--
       var light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
 			light.position.set(0.5, 1, 0.25);
 			scene.add(light);
 
-      // 3D OBJECTS
+      // --3D OBJECTS--
 
+      // Jellyfish
+      let jellyFish;
+      const jellyPath = 'assets/jellyfish/scene.gltf';
+      loader = new THREE.GLTFLoader();
+      loader.load(
+        jellyPath,
+        function (gltf){
+          jellyFish = gltf.scene;
+          jellyFish.position.set(0, 0, -8);
+          jellyFish.scale.set(.2, .2, .2);
+          scene.add(jellyFish);
+          console.log(jellyFish);
+        }
+      )
       // isocahedron!!
       const geometry = new THREE.IcosahedronGeometry(0.1, 1);
       const material = new THREE.MeshPhongMaterial({
@@ -61,11 +75,11 @@
       mesh.userData.canLink = true
       mesh.userData.name = "box"
 
-      // RAYCASTER
+      // --RAYCASTER--
       mouse = new THREE.Vector2();
       raycaster = new THREE.Raycaster();
 
-      // SPRITES
+      // --SPRITES--
 
       // linkedin
       const linkedinMap = new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/szbrooks2017/Webxr-Business_Card/main/assets/AR_Card_linkedin.png' );
@@ -123,7 +137,7 @@
           canLink = found[0].object;
           if (canLink.userData.name == 'linkedin')
           {
-            window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
+            // window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
             console.log(canLink.userData.name);
           }
           if (canLink.userData.name == 'github')
