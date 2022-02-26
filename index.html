@@ -76,7 +76,7 @@
       var loader1 = new THREE.GLTFLoader().setPath( 'assets/jellyfish/' );
       loader1.load( 'scene.gltf', function ( gltf ) {
         jellyFish1 = gltf.scene 
-        jellyFish1.position.set(10, -7, -2);
+        jellyFish1.position.set(15, -7, -2);
         jellyFish1.scale.set(.2, .2, .2);
         mixer1 = new THREE.AnimationMixer( gltf.scene );
         var action1 = mixer1.clipAction( gltf.animations[ 0 ] );
@@ -87,7 +87,7 @@
       var loader2 = new THREE.GLTFLoader().setPath( 'assets/jellyfish/' );
       loader1.load( 'scene.gltf', function ( gltf ) {
         jellyFish2 = gltf.scene 
-        jellyFish2.position.set(13, -7, 10);
+        jellyFish2.position.set(-13, -7, 10);
         jellyFish2.scale.set(.2, .2, .2);
         mixer2 = new THREE.AnimationMixer( gltf.scene );
         var action2 = mixer2.clipAction( gltf.animations[ 0 ] );
@@ -153,23 +153,19 @@
           canLink = found[0].object;
           if (canLink.userData.name == 'linkedin')
           {
-            // window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
-            console.log(canLink.userData.name);
+            window.location.href = "https://www.linkedin.com/in/stratton-brooks/";
           }
           if (canLink.userData.name == 'github')
           {
             window.location.href = "https://www.github.com/szbrooks2017/";
-            console.log(canLink.userData.name);
           }
           if (canLink.userData.name == 'instagram')
           {
-            // window.location.href = "https://www.instagram.com/stratton.brooks/";
-            console.log(canLink.userData.name);
+            window.location.href = "https://www.instagram.com/stratton.brooks/";
           }
           if (canLink.userData.name == 'email')
           {
             window.location.href = "mailto:strattonxr@gmail.com";
-            console.log(canLink.userData.name);
           }
         
         }
