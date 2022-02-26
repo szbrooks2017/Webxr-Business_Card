@@ -37,12 +37,15 @@
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true});
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(window.innerWidth / window.innerHeight);
+      // for gltf
+      renderer.gammaFactor = 2;
+      renderer.gammaOutput = true;
       // enable for xr and add it to the DOM
       renderer.xr.enabled = true;
       container.appendChild(renderer.domElement);
 
       // --LIGHT--
-      var light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+      var light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 2);
 			light.position.set(0.5, 1, 0.25);
 			scene.add(light);
 
@@ -68,55 +71,6 @@
 
       } );
 
-      // const jellyPath = 'assets/jellyfish/scene.gltf';
-      // loader = new THREE.GLTFLoader();
-
-      // loader.load( jellyPath, function (gltf){
-      //     jellyFish = jellyFish;
-      //     jellyAnim = gltf.animations;
-      //     jellyFish.position.set(0, 0, -8);
-      //     jellyFish.scale.set(.2, .2, .2);
-      //     // jelly fish animation
-      //     mixer = new THREE.AnimationMixer( jellyFish );
-      //     var action = mixer.clipAction(jellyAnim[0]);
-      //     action.play();
-      //     console.log(action.getRoot());
-      //     // console.log(mixer);
-      //     // const clips = gltf.animations;
-      //     // const clip = THREE.AnimationClip.findByName(jellyMesh, 'Take 001');
-      //     // const action = mixer.clipAction( clip );
-      //     // action.play();
-      //     scene.add(jellyFish);
-      //     clips.forEach( function ( clip ) {
-      //       mixer.clipAction( clip ).play();
-      //     } );
-
-      //   })
-      // console.log(jellyFish);
-      // const mixer = new THREE.AnimationMixer( jellyFish );
-      // const clips = jellyFish.animation;
-
-      // clips.forEach( function ( clip ) {
-      //   mixer.clipAction( clip ).play();
-      // } );
-
-      // isocahedron!!
-      const geometry = new THREE.IcosahedronGeometry(0.1, 1);
-      const material = new THREE.MeshPhongMaterial({
-        color: new THREE.Color("rgb(255, 163, 140)"),
-        shininess: 6,
-        flatShading: true,
-        opacity: 0.8,
-        transparent: 1
-      })
-      mesh = new THREE.Mesh(geometry, material);
-      mesh.position.set(-1, 0, -0.5);
-      scene.add(mesh);
-      
-      mesh.userData.canLink = true;
-      mesh.userData.name = "box";
-
-
       // --SPRITES--
 
       // linkedin
@@ -124,7 +78,7 @@
       const linkedinMaterial = new THREE.SpriteMaterial(  {map: linkedinMap} );
       const linkedSprite = new THREE.Sprite( linkedinMaterial );
       linkedSprite.scale.set(.3, .3, .3);
-      linkedSprite.position.set(.5, 0, 0);
+      linkedSprite.position.set(.5, -.5, 0);
       linkedSprite.userData.canLink = true;
       linkedSprite.userData.name = "linkedin";
       scene.add( linkedSprite );
@@ -134,7 +88,7 @@
       const githubMaterial = new THREE.SpriteMaterial(  {map: githubMap} );
       const githubSprite = new THREE.Sprite( githubMaterial );
       githubSprite.scale.set(.3, .3, .3);
-      githubSprite.position.set(-.5, 0, 0);
+      githubSprite.position.set(-.5, -.5, 0);
       githubSprite.userData.canLink = true;
       githubSprite.userData.name = "github";
       scene.add( githubSprite );
@@ -144,7 +98,7 @@
       const emailMaterial = new THREE.SpriteMaterial(  {map: emailMap} );
       const emailSprite = new THREE.Sprite( emailMaterial );
       emailSprite.scale.set(.3, .3, .3);
-      emailSprite.position.set(-.5, 0, -1);
+      emailSprite.position.set(-.5, -.5, -1);
       emailSprite.userData.canLink = true;
       emailSprite.userData.name = "email";
       scene.add( emailSprite );
@@ -154,7 +108,7 @@
       const instagramMaterial = new THREE.SpriteMaterial(  {map: instagramMap} );
       const instagramSprite = new THREE.Sprite( instagramMaterial );
       instagramSprite.scale.set(.3, .3, .3);
-      instagramSprite.position.set(.5, 0, -1);
+      instagramSprite.position.set(.5, -.5, -1);
       instagramSprite.userData.canLink = true
       instagramSprite.userData.name = "instagram"
       scene.add( instagramSprite );
@@ -220,25 +174,9 @@
       renderer.setAnimationLoop(render);
       // stats.update();
       }
-    // function animate() {
-    //   requestAnimationFrame( animate );
-    //   var delta = clock.getDelta();
-    //   if ( mixer ) mixer.update( delta );
-    //   raycaster.setFromCamera( mouse, camera );
-    //   renderer.setAnimationLoop(render);
-  
-    //   }
-
-    // function animate(){
-    //   var delta = clock.getDelta()
-    //   if (mixer) mixer.update(delta);
-    //   // set teh render to be called in a loop
-    //   renderer.setAnimationLoop(render);
-    //   }
 
     function render(){
-      	// update the picking ray with the camera and pointer position
-      // raycaster.setFromCamera( mouse, camera );
+      // update the picking ray with the camera and pointer position
       renderer.render(scene, camera);
     }
 // <!-- Starting an immersive WebXR session requires user interaction. We start this one with a simple button. -->
