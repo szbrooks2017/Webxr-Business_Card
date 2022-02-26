@@ -27,7 +27,7 @@
 
       // --SCENE--
       scene = new THREE.Scene();
-
+      // -- START DELTA TIME--
       clock = new THREE.Clock();
 
       // --CAMERA--
@@ -78,7 +78,7 @@
       const linkedinMaterial = new THREE.SpriteMaterial(  {map: linkedinMap} );
       const linkedSprite = new THREE.Sprite( linkedinMaterial );
       linkedSprite.scale.set(.3, .3, .3);
-      linkedSprite.position.set(.5, -.5, 0);
+      linkedSprite.position.set(0.20, -1, -1);
       linkedSprite.userData.canLink = true;
       linkedSprite.userData.name = "linkedin";
       scene.add( linkedSprite );
@@ -88,7 +88,7 @@
       const githubMaterial = new THREE.SpriteMaterial(  {map: githubMap} );
       const githubSprite = new THREE.Sprite( githubMaterial );
       githubSprite.scale.set(.3, .3, .3);
-      githubSprite.position.set(-.5, -.5, 0);
+      githubSprite.position.set(-0.20, -1, -1);
       githubSprite.userData.canLink = true;
       githubSprite.userData.name = "github";
       scene.add( githubSprite );
@@ -98,7 +98,7 @@
       const emailMaterial = new THREE.SpriteMaterial(  {map: emailMap} );
       const emailSprite = new THREE.Sprite( emailMaterial );
       emailSprite.scale.set(.3, .3, .3);
-      emailSprite.position.set(-.5, -.5, -1);
+      emailSprite.position.set(-.6, -1, -1);
       emailSprite.userData.canLink = true;
       emailSprite.userData.name = "email";
       scene.add( emailSprite );
@@ -108,7 +108,7 @@
       const instagramMaterial = new THREE.SpriteMaterial(  {map: instagramMap} );
       const instagramSprite = new THREE.Sprite( instagramMaterial );
       instagramSprite.scale.set(.3, .3, .3);
-      instagramSprite.position.set(.5, -.5, -1);
+      instagramSprite.position.set(.6, -1, -1);
       instagramSprite.userData.canLink = true
       instagramSprite.userData.name = "instagram"
       scene.add( instagramSprite );
