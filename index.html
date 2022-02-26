@@ -14,7 +14,7 @@
     import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
 
     var camera, scene, renderer, mesh, mouse, raycaster, loader;
-    let jellyMesh, mixer;
+    let jellyAnim, mixer, clock;
     // var canLink = THREE.Object3D;
 
 
@@ -27,6 +27,8 @@
 
       // --SCENE--
       scene = new THREE.Scene();
+
+      clock = new THREE.Clock();
 
       // --CAMERA--
       camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 40);
@@ -47,30 +49,41 @@
       // --3D OBJECTS--
 
       // Jellyfish
-      let jellyFish;
-      const jellyPath = 'assets/jellyfish/scene.gltf';
-      loader = new THREE.GLTFLoader();
-      loader.load(
-        jellyPath,
-        function (gltf){
-          jellyFish = gltf.scene;
-          jellyMesh = gltf.animations;
-          jellyFish.position.set(0, 0, -8);
-          jellyFish.scale.set(.2, .2, .2);
-          // jelly fish animation
-          mixer = new THREE.AnimationMixer( jellyFish );
-          // console.log(mixer);
-          // const clips = gltf.animations;
+      // let jellyFish;
+      // const jellyPath = 'assets/jellyfish/scene.gltf';
+      // loader = new THREE.GLTFLoader();
+      var loader = new THREE.GLTFLoader().setPath( 'assets/jellyfish/' );
+      loader.load( 'scene.gltf', function ( gltf ) {
 
-          const clip = THREE.AnimationClip.findByName(jellyMesh, 'Take 001');
-          const action = mixer.clipAction( clip );
-          action.play();
-          scene.add(jellyFish);
+        mixer = new THREE.AnimationMixer( gltf.scene );
+        var action = mixer.clipAction( gltf.animations[ 0 ] );
+        action.play();
+
+        scene.add( gltf.scene );
+
+      } );
+
+      // loader.load( jellyPath, function (gltf){
+      //     jellyFish = gltf.scene;
+      //     jellyAnim = gltf.animations;
+      //     jellyFish.position.set(0, 0, -8);
+      //     jellyFish.scale.set(.2, .2, .2);
+      //     // jelly fish animation
+      //     mixer = new THREE.AnimationMixer( jellyFish );
+      //     var action = mixer.clipAction(jellyAnim[0]);
+      //     action.play();
+      //     console.log(action.getRoot());
+      //     // console.log(mixer);
+      //     // const clips = gltf.animations;
+      //     // const clip = THREE.AnimationClip.findByName(jellyMesh, 'Take 001');
+      //     // const action = mixer.clipAction( clip );
+      //     // action.play();
+      //     scene.add(jellyFish);
           // clips.forEach( function ( clip ) {
           //   mixer.clipAction( clip ).play();
           // } );
 
-        })
+        // })
       // jelly fish animation
       // console.log(jellyFish);
       // const mixer = new THREE.AnimationMixer( jellyFish );
@@ -186,6 +199,9 @@
 
       window.addEventListener('resize', onWindowResize, false);
       window.addEventListener( 'pointermove', onPointerMove );
+      // stats
+      // stats = new Stats();
+      // container.appendChild( stats.dom );
     }
 
     function onWindowResize() {
@@ -197,20 +213,27 @@
     // function update () {
     //   mixer.update( deltaSeconds );
     // }
-
-    function animate(){
-      // set teh render to be called in a loop
-      renderer.setAnimationLoop(render);
-      if (mixer) {
-          mixer.update(clock.getDelta());
-        }
-    }
-
-    function render(){
-      	// update the picking ray with the camera and pointer position
+    function animate() {
+      requestAnimationFrame( animate );
+      var delta = clock.getDelta();
+      if ( mixer ) mixer.update( delta );
       raycaster.setFromCamera( mouse, camera );
-      renderer.render(scene, camera);
-    }
+      renderer.render( scene, camera );
+      // stats.update();
+      }
+
+    // function animate(){
+    //   var delta = clock.getDelta()
+    //   if (mixer) mixer.update(delta);
+    //   // set teh render to be called in a loop
+    //   renderer.setAnimationLoop(render);
+    //   }
+
+    // function render(){
+    //   	// update the picking ray with the camera and pointer position
+    //   raycaster.setFromCamera( mouse, camera );
+    //   renderer.render(scene, camera);
+    // }
 // <!-- Starting an immersive WebXR session requires user interaction. We start this one with a simple button. -->
 // <!-- <input type = "button" onclick = "activateXR()" value = "Activate Business Card" id="start-ar"> -->
   </script>
