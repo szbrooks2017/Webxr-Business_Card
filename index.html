@@ -13,7 +13,7 @@
   <script type="module">
     import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
 
-    var camera, scene, renderer, mesh, mouse, raycaster, loader;
+    var camera, scene, renderer, mesh, mouse, raycaster, loader, spotLight;
     let jellyFish, jellyFish1, jellyFish2, jellyFish3, mixer, mixer1, mixer2, mixer3, clock;
     // var canLink = THREE.Object3D;
 
@@ -42,19 +42,32 @@
       // renderer.gammaFactor = 2;
       // renderer.gammaOutput = true;
       renderer.outputEncoding = THREE.sRGBEncoding;
-      renderer.shadow
+      renderer.toneMapping = THREE.ReinhardToneMapping;
+      renderer.toneMappingExposure = 2.3;
+      renderer.shadowMap.enabled = true;
       // enable for xr and add it to the DOM
       renderer.xr.enabled = true;
       container.appendChild(renderer.domElement);
+      // for rect area
+      // RectAreaLightUniformsLib.init();
+      // const rectlight = new THREE.RectAreaLightHelper
 
       // --LIGHT--
-      var light = new THREE.HemisphereLight(0xffffff, new THREE.Color('rgb(235, 64, 52)'), 1);
+      var light = new THREE.HemisphereLight(0xffeeb1, 0x080820, 4);
 			light.position.set(0.5, 1, 0.25);
 			scene.add(light);
 
-      var directionalLight = new THREE.DirectionalLight(new THREE.Color('rgb(235, 64, 52)'), 2);
-      directionalLight.position.set(10, 10, 13);
-      scene.add(directionalLight);
+      spotLight = new THREE.SpotLight(0xffa95c, 4);
+      spotLight.castShadow = true;
+      spotLight.position.set(10, 10, 10);
+      spotLight.shadow.bias = -0.0001;
+      spotLight.shadow.mapSize.width = 1024*4;
+      spotLight.shadow.mapSize.height = 1024*4;
+      scene.add(spotLight);
+
+      // var directionalLight = new THREE.DirectionalLight(new THREE.Color('rgb(235, 64, 52)'), 2);
+      // directionalLight.position.set(10, 10, 13);
+      // scene.add(directionalLight);
 
       // --RAYCASTER--
       mouse = new THREE.Vector2();
@@ -66,8 +79,15 @@
       var loader = new THREE.GLTFLoader().setPath( 'assets/jellyfish/' );
       loader.load( 'scene.gltf', function ( gltf ) {
         jellyFish = gltf.scene 
-        jellyFish.position.set(0, 0, -8);
+        jellyFish.position.set(0, -6, -8);
         jellyFish.scale.set(.2, .2, .2);
+        jellyFish.traverse(n => {
+          if(n.isMesh){
+            n.castShadow = true;
+            n.receiveShadow = true;
+            if(n.material.map) n.material.map.anisotropy = 16
+          }
+        })
         mixer = new THREE.AnimationMixer( gltf.scene );
         var action = mixer.clipAction( gltf.animations[ 0 ] );
         action.play();
@@ -79,6 +99,13 @@
         jellyFish1 = gltf.scene 
         jellyFish1.position.set(15, -7, -2);
         jellyFish1.scale.set(.2, .2, .2);
+        jellyFish1.traverse(n => {
+          if(n.isMesh){
+            n.castShadow = true;
+            n.receiveShadow = true;
+            if(n.material.map) n.material.map.anisotropy = 16
+          }
+        })
         mixer1 = new THREE.AnimationMixer( gltf.scene );
         var action1 = mixer1.clipAction( gltf.animations[ 0 ] );
         action1.play();
@@ -90,6 +117,13 @@
         jellyFish2 = gltf.scene 
         jellyFish2.position.set(-13, -7, 10);
         jellyFish2.scale.set(.2, .2, .2);
+        jellyFish2.traverse(n => {
+          if(n.isMesh){
+            n.castShadow = true;
+            n.receiveShadow = true;
+            if(n.material.map) n.material.map.anisotropy = 16
+          }
+        })
         mixer2 = new THREE.AnimationMixer( gltf.scene );
         var action2 = mixer2.clipAction( gltf.animations[ 0 ] );
         action2.play();
@@ -101,6 +135,13 @@
         jellyFish3 = gltf.scene 
         jellyFish3.position.set(8, 3, 8);
         jellyFish3.scale.set(.2, .2, .2);
+        jellyFish3.traverse(n => {
+          if(n.isMesh){
+            n.castShadow = true;
+            n.receiveShadow = true;
+            if(n.material.map) n.material.map.anisotropy = 16
+          }
+        })
         mixer3 = new THREE.AnimationMixer( gltf.scene );
         var action3 = mixer3.clipAction( gltf.animations[ 0 ] );
         action3.play();
@@ -219,7 +260,7 @@
     function moveJelly(){
       if (jellyFish !== undefined)
       {
-        jellyFish.position.y += .005;
+        jellyFish.position.y += .0005;
       }
       if (jellyFish1 !== undefined)
       {
