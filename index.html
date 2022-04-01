@@ -39,12 +39,13 @@
       renderer.setSize(window.innerWidth / window.innerHeight);
       console.log(render);
       // for gltf
-      // renderer.gammaFactor = 2;
-      // renderer.gammaOutput = true;
+      renderer.gammaFactor = 2;
       renderer.outputEncoding = THREE.sRGBEncoding;
       renderer.toneMapping = THREE.ReinhardToneMapping;
       renderer.toneMappingExposure = 2.3;
       renderer.shadowMap.enabled = true;
+
+
       // enable for xr and add it to the DOM
       renderer.xr.enabled = true;
       container.appendChild(renderer.domElement);
@@ -74,7 +75,7 @@
       raycaster = new THREE.Raycaster();
 
       // --3D OBJECTS--
-
+      const jellyClone = new THREE.Object3D();
       // Jellyfish
       var loader = new THREE.GLTFLoader().setPath( 'assets/jellyfish/' );
       loader.load( 'scene.gltf', function ( gltf ) {
@@ -86,6 +87,7 @@
             n.castShadow = true;
             n.receiveShadow = true;
             if(n.material.map) n.material.map.anisotropy = 16
+            if(n.material.emissive) console.log(n.material.emissive);
           }
         })
         mixer = new THREE.AnimationMixer( gltf.scene );
@@ -122,6 +124,8 @@
             n.castShadow = true;
             n.receiveShadow = true;
             if(n.material.map) n.material.map.anisotropy = 16
+            if(n.material.opacity)n.material.opacity = 1
+            // if(n.material.transparent) n.material.transparent = false;
           }
         })
         mixer2 = new THREE.AnimationMixer( gltf.scene );
