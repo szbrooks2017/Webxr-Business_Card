@@ -1,27 +1,29 @@
 # Webxr-Business_Card
  ![alt text](https://raw.githubusercontent.com/szbrooks2017/Webxr-Business_Card/main/assets/ar-business-card.png)
-  An introduction to XR and 3D objects for the Oculus input system. This project is an escape-room-like display, but it's easy to escape.
+  An introduction to the WebXR API. This application uses Three.JS and WebGL to render a business card with animated jellyfish.
  
- ## How to install for Android
- - Download the apk from [here](https://drive.google.com/file/d/1tZl-6tCvvK0zqAOLl7nTNqpEV0O9dMpc/view?usp=sharing)
- - Sideload the game into your chosen device using [SideQuest](https://sidequestvr.com/).
- - Make sure **Unkown Sources** is enabled in your Oculus app on your computer--in Settings/General.
- - In your Oculus navigate to the 'Unknown Source' in your apps.
+ ## How to view on Android
+ - Go to the following link and click the Start AR button [here](https://szbrooks2017.github.io/Webxr-Business_Card/)
+ - Make sure to allow access to your camera when prompted.
  - Launch and explore!
 
+## How to view for IOS
+ - Unfortunately the WebXR API isn't compatable with iphones yet!
+ - The managing group for Safari is exploring integrating the API.
+
  ## Intended features
- - Teleportation is implemented.
- - Certain objects are interactable.
- - The consoles require the remote to operate in both the storage room and main room.
+ - Clickable buttons
+ - Floating animated jellyfish!! There are four!
 
 ## Needs to be implemented
 - I want to go back and optimize the meshes/lighting.
 - I want to add more interaction with certain objects with animation.
+- I want to find a way to integrate this concept with Iphone either with this api or a different framework
 
 ## Challenges
-- Learning how physics affects everything.
+- Learning how objects get rendered to a web browser screen.
 - Understanding XR UI with raycasting.
-- Deploying and debugging in VR
+- Uploading 3D models for AR
 
 ## Developer
 I'm Stratton Brooks, an XR developer based in Tulsa, OK. I'm Native American. I specialize in Unity and WebXR.
