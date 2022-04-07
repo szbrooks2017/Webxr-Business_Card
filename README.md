@@ -8,7 +8,7 @@
  - Launch and explore!
 
 ## How to view for IOS
- - Unfortunately the WebXR API isn't compatable with iphones yet!
+ - Unfortunately the WebXR API isn't compatable with Iphones yet!
  - The managing group for Safari is exploring integrating the API.
 
  ## Intended features
